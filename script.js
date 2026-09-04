@@ -1,18 +1,19 @@
 const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-nav]');
-const year = document.querySelector('[data-year]');
 
-if (year) year.textContent = new Date().getFullYear();
+document.querySelectorAll('[data-year]').forEach((year) => {
+  year.textContent = new Date().getFullYear();
+});
 
 const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
 menuToggle?.addEventListener('click', () => {
-  const open = menuToggle.getAttribute('aria-expanded') === 'true';
-  menuToggle.setAttribute('aria-expanded', String(!open));
-  navigation?.classList.toggle('is-open', !open);
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  navigation?.classList.toggle('is-open', !isOpen);
 });
 
 navigation?.querySelectorAll('a').forEach((link) => {
@@ -34,6 +35,47 @@ if (reducedMotion || !('IntersectionObserver' in window)) {
       entry.target.classList.add('is-visible');
       currentObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.14, rootMargin: '0px 0px -5% 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
   revealItems.forEach((item) => observer.observe(item));
 }
+
+const rootyDialog = document.querySelector('[data-rooty-dialog]');
+const rootyOpen = document.querySelector('[data-rooty-open]');
+const rootyClose = document.querySelector('[data-rooty-close]');
+const rootyNext = document.querySelector('[data-rooty-next]');
+const rootyLine = document.querySelector('[data-rooty-line]');
+const rootyWorld = document.querySelector('[data-rooty-world]');
+const rootyLines = [
+  'I am not exactly the owner of this place.',
+  'I am closer to its psyche.',
+  'When something changes here, I usually feel it first.',
+  'But you do not have to understand me yet.'
+];
+let rootyStep = 0;
+
+const resetRooty = () => {
+  rootyStep = 0;
+  if (rootyLine) rootyLine.textContent = rootyLines[0];
+  if (rootyNext) rootyNext.hidden = false;
+  if (rootyWorld) rootyWorld.hidden = true;
+};
+
+rootyOpen?.addEventListener('click', () => {
+  resetRooty();
+  rootyDialog?.showModal();
+});
+
+rootyClose?.addEventListener('click', () => rootyDialog?.close());
+rootyDialog?.addEventListener('click', (event) => {
+  if (event.target === rootyDialog) rootyDialog.close();
+});
+
+rootyNext?.addEventListener('click', () => {
+  rootyStep += 1;
+  if (rootyLine) rootyLine.textContent = rootyLines[rootyStep];
+  if (rootyStep === rootyLines.length - 1) {
+    rootyNext.hidden = true;
+    rootyWorld.hidden = false;
+    rootyWorld.focus();
+  }
+});

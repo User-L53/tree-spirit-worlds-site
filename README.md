@@ -14,7 +14,9 @@ Do not commit:
 - unpublished manuscripts, editable production assets, or private business records;
 - environment files or service exports.
 
-Payhip owns checkout, payment processing, and product delivery. A secure external provider will own newsletter consent and subscriber storage. The website must never collect or store those records directly.
+Payhip owns checkout, payment processing, and product delivery. Buttondown owns newsletter consent and subscriber storage. The website must never collect or store those records directly.
+
+The public site uses no API keys, client-side payment form, analytics tracker, social-media embed, third-party JavaScript library, or web-font dependency. Its only public integrations are ordinary external links and Buttondown's native HTML POST form.
 
 ## Current publication state
 
