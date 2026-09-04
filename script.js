@@ -60,14 +60,27 @@ const resetRooty = () => {
   if (rootyWorld) rootyWorld.hidden = true;
 };
 
+const closeRooty = () => {
+  if (!rootyDialog) return;
+  rootyDialog.hidden = true;
+  document.body.classList.remove('rooty-active');
+  rootyOpen?.focus();
+};
+
 rootyOpen?.addEventListener('click', () => {
   resetRooty();
-  rootyDialog?.showModal();
+  if (!rootyDialog) return;
+  rootyDialog.hidden = false;
+  document.body.classList.add('rooty-active');
+  rootyClose?.focus();
 });
 
-rootyClose?.addEventListener('click', () => rootyDialog?.close());
+rootyClose?.addEventListener('click', closeRooty);
 rootyDialog?.addEventListener('click', (event) => {
-  if (event.target === rootyDialog) rootyDialog.close();
+  if (event.target === rootyDialog) closeRooty();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && rootyDialog && !rootyDialog.hidden) closeRooty();
 });
 
 rootyNext?.addEventListener('click', () => {
