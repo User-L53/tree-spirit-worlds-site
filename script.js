@@ -66,6 +66,7 @@ const closeRooty = () => {
   rootyDialog.hidden = true;
   document.body.classList.remove('rooty-active');
   document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = false);
+  rootyOpen?.setAttribute('aria-expanded', 'false');
   rootyOpen?.focus();
 };
 
@@ -73,6 +74,7 @@ rootyOpen?.addEventListener('click', () => {
   resetRooty();
   if (!rootyDialog) return;
   rootyDialog.hidden = false;
+  rootyOpen?.setAttribute('aria-expanded', 'true');
   document.body.classList.add('rooty-active');
   document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = true);
   rootyClose?.focus();
@@ -87,6 +89,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 rootyNext?.addEventListener('click', () => {
+  if (rootyStep >= rootyLines.length - 1) return;
   rootyStep += 1;
   if (rootyLine) rootyLine.textContent = rootyLines[rootyStep];
   if (rootyStep === rootyLines.length - 1) {

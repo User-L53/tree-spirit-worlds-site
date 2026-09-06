@@ -65,3 +65,16 @@ main section,main article{scroll-margin-top:6rem}
 @media(min-width:801px){.menu-toggle{display:none}}
 html:not(.js) .reveal{opacity:1;transform:none}
 @media(max-width:800px){html:not(.js) .site-header{position:relative;flex-wrap:wrap}html:not(.js) .site-nav{position:static;display:flex;width:100%}html:not(.js) .menu-toggle{display:none}}
+
+/* Gap closure: directions remain open; feedback precedes deliberate discovery. */
+.threshold-paths{border-top:0;gap:clamp(1.5rem,4vw,4rem)}
+.threshold-paths a,.threshold-paths a:not(:first-child){border:0;padding:1rem 0}
+.path-name::after{content:" →";font-size:.65em}
+.clock-object:hover .clock-face,.clock-object:focus-visible .clock-face{border-color:var(--paper)}
+.clock-object:active .clock-face{transform:translateY(-2px)}
+.rooty-portrait[aria-expanded="true"] img{transform:translateY(-2px)}
+.object-work .text-link{max-width:100%;line-height:1.5;text-align:left}
+.brand-lockup{min-height:44px}
+@media(max-width:800px){.threshold-paths{position:static;grid-column:1/-1;margin-top:2rem;gap:.75rem}.threshold{padding-bottom:3rem}.threshold-paths a,.threshold-paths a:not(:first-child){padding:.65rem 0}.path-note{max-width:24rem}}
+@media(max-width:380px){.threshold-paths a{grid-template-columns:5.5rem minmax(0,1fr);gap:.75rem}.path-name{font-size:1.3rem}.brand-lockup{letter-spacing:.035em}.site-header{gap:.5rem}.rooty-controls{align-items:stretch;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.clock-object:active .clock-face,.rooty-portrait[aria-expanded="true"] img{transform:none}}

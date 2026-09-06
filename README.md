@@ -62,3 +62,18 @@ for QA. Retailer names are informational until exact product URLs are verified.
 
 Deploy only to the existing temporary GitHub Pages branch. Do not add CNAME,
 change DNS, migrate domains, or alter Payhip configuration. Stop for owner review.
+
+
+## Gap closure pass
+
+Preserve the system-v1 architecture. Final product copy keeps “Sophie does not.” as
+its own paragraph. The clock's revealed link reads “Discover The Internal Clock”.
+Focus/hover gives an immediate border response, activation changes state, and entry
+remains a separate link. Rooty exposes expanded state and bounded optional dialogue.
+Home pathways use unboxed directions; mobile pathways follow content in normal flow,
+preventing overlap with Rooty or enlarged text. All approved image assets unchanged.
+About and Letters content/form unchanged. Shared asset version: gap-1.
+
+Mobile viewport emulation is unavailable in the review browser; source inspection
+is not equivalent to a complete mobile journey test. Physical-phone review remains
+outstanding. Payhip stays the exact owner-verified product link fallback.
