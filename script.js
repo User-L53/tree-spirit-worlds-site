@@ -1,3 +1,4 @@
+document.documentElement.classList.add('js');
 const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-nav]');
@@ -57,13 +58,14 @@ const resetRooty = () => {
   rootyStep = 0;
   if (rootyLine) rootyLine.textContent = rootyLines[0];
   if (rootyNext) rootyNext.hidden = false;
-  if (rootyWorld) rootyWorld.hidden = true;
+  if (rootyWorld) rootyWorld.hidden = false;
 };
 
 const closeRooty = () => {
   if (!rootyDialog) return;
   rootyDialog.hidden = true;
   document.body.classList.remove('rooty-active');
+  document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = false);
   rootyOpen?.focus();
 };
 
@@ -72,6 +74,7 @@ rootyOpen?.addEventListener('click', () => {
   if (!rootyDialog) return;
   rootyDialog.hidden = false;
   document.body.classList.add('rooty-active');
+  document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = true);
   rootyClose?.focus();
 });
 
@@ -91,4 +94,33 @@ rootyNext?.addEventListener('click', () => {
     rootyWorld.hidden = false;
     rootyWorld.focus();
   }
+});
+
+// Modal focus is contained; an exit path never depends on finishing the dialogue.
+rootyDialog?.addEventListener('keydown', event => {
+  if (event.key !== 'Tab') return;
+  const items = [...rootyDialog.querySelectorAll('button, a[href]')].filter(el => !el.hidden);
+  const first = items[0], last = items[items.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navigation?.classList.contains('is-open')) {
+    navigation.classList.remove('is-open'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.focus();
+  }
+});
+// Notice → touch → immediate response → revealed identity → optional entry.
+document.querySelectorAll('[data-encounter]').forEach(encounter => {
+  const touch = encounter.querySelector('[data-object-touch]');
+  const work = encounter.querySelector('[data-object-work]');
+  const cue = encounter.querySelector('[data-object-cue]');
+  touch.hidden = false; work.hidden = true;
+  touch.addEventListener('click', () => {
+    const revealed = touch.getAttribute('aria-expanded') !== 'true';
+    touch.setAttribute('aria-expanded', String(revealed));
+    encounter.dataset.state = revealed ? 'revealed' : 'rest';
+    work.hidden = !revealed;
+    cue.textContent = revealed ? 'Time need not be a line.' : 'Touch the clock';
+    touch.setAttribute('aria-label', revealed ? 'Hide the clock’s story' : 'Touch the clock to discover the work');
+  });
 });
