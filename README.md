@@ -65,5 +65,26 @@ Temporary responsive QA fixtures are removed before final owner handoff.
 - About hover/click interaction conflict caught during QA and corrected with pinned
   disclosure state. Mobile navigation controls adjusted toward 44px target width.
 - Letters farewell reached its automatic final state without submitting the form.
-- Tree/root positions remain temporary; the final artwork is still a blocker to
-  completing the intended visual experience. No final tree/root visual QA claimed.
+- Tree/root placeholders were superseded by the Sacred Tree completion pass below.
+
+## Sacred Tree / Root System completion
+
+The owner-approved Ancient Tree image supplies morphology only. A new built-in
+imagegen illustration translates its thick irregular trunk, asymmetrical canopy,
+exposed roots and continuous deep roots into restrained ink and moss/earth washes.
+The source reference is not published. Web derivatives: sacred-tree-system.webp
+(1024 × 1536) and sacred-tree-system-small.webp (640 × 960).
+
+One unbroken portrait silhouette preserves trunk/root continuity. CSS blending and
+soft edge masks integrate its paper field; desktop copy uses the open deep-root
+center, while at <=700px copy follows the intact image in normal flow. No image
+cropping, parallax, sound or per-root animation. A one-time 1000ms density reveal
+uses the existing observer. Reduced motion and no-JavaScript show the whole artwork.
+Home now says Enter the Space. The new rendering remains subject to owner visual
+approval. No Workload 2 or Cycle 3 actions are included in this completion pass.
+
+Generation prompt specification: illustration-story; reference for morphology only;
+one ancient thick irregular trunk, asymmetrical broad canopy, exposed-to-deep roots;
+dry forest-green ink, moss/earth washes on warm cream; portrait continuous system;
+open lower-center text space; no photographic lighting, fantasy effects, characters,
+text, border or background landscape. Full morphology is retained at narrow widths.

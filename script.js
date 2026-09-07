@@ -37,7 +37,7 @@ const speak = () => {
 };
 rooty?.addEventListener('click', speak);
 // Progressive enhancement: all narrative text and work links remain available without JS.
-const reveals = document.querySelectorAll('.reveal');
+const reveals = document.querySelectorAll('.reveal, [data-root-depth]');
 const farewell = document.querySelector('[data-farewell]');
 const show = element => element.classList.add(element.matches('[data-farewell]') ? 'is-present' : 'is-visible');
 if (reducedMotion.matches || !('IntersectionObserver' in window)) { reveals.forEach(show); if (farewell) show(farewell); }
