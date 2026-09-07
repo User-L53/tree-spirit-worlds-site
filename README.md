@@ -16,8 +16,8 @@ Shared tokens, responsive layouts, keyboard controls and reduced-motion rules li
 in styles.css. Interaction state lives in script.js; pages remain plain semantic HTML.
 
 - Home: centered Rooty; optional in-page progressive dialogue; no modal/Next controls.
-  About / Space / Shop directions always remain available. Existing final invitation
-  “Enter the World” is intentionally retained per the refinement brief.
+  About / Space / Shop directions always remain available. Final invitation
+  “Enter the Space” follows the Sacred Tree completion brief.
 - About: identity, storytellers/world-builders, four media, why, quiet closing principle.
 - Space: tree/root architecture, space between, spatial time, text transformation,
   distancing/storytelling principle, handless Roman-numeral clock → product.
@@ -30,14 +30,12 @@ in styles.css. Interaction state lives in script.js; pages remain plain semantic
 - Letters: original form and two-column relationship retained; peripheral Rooty
   automatically changes presence and reveals “Until next time.” independently of form.
 
-## Artwork still required
+## Artwork review
 
-Space's significant tree and root-system assets are not supplied as approved final
-production artwork. Clearly identified temporary positions reserve their composition;
-they are not final illustrations. Supply one major spirit tree and a coherent extended
-root system, without text labels, suitable for desktop and narrow vertical compositions.
-Do not replace them with the logo or generic fantasy imagery. No private master/reference
-sheet or paid narrative source belongs in this repository.
+The Sacred Tree and continuous roots now use a newly generated website illustration,
+translated from the owner-approved morphology reference. No temporary artwork slots
+remain. Owner approval of the final website rendering is still required. Original
+reference/master sheets and paid narrative source remain outside the public repo.
 
 ## QA boundaries
 
@@ -88,3 +86,11 @@ one ancient thick irregular trunk, asymmetrical broad canopy, exposed-to-deep ro
 dry forest-green ink, moss/earth washes on warm cream; portrait continuous system;
 open lower-center text space; no photographic lighting, fantasy effects, characters,
 text, border or background landscape. Full morphology is retained at narrow widths.
+
+Completion QA: desktop tree/root integration visually inspected. Embedded widths
+320/390/768px have no page horizontal overflow; full silhouette remains visible.
+Root depth reveal reached its visible state. Keyboard activation passed for Rooty
+and the Clock; the corrected Home invitation reaches Space. Subsequent approved
+Space copy and Clock markup are unchanged. No page-origin console errors observed.
+Physical mobile touch, OS reduced-motion and screen-reader checks remain manual;
+reduced-motion and no-JS behavior were checked in source, not device-certified.
