@@ -4,13 +4,15 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 // About is a disclosure beside a normal navigation link, not an application menu.
 const aboutNav = document.querySelector('[data-about-nav]');
 const aboutToggle = document.querySelector('[data-about-toggle]');
+let aboutPinned = false;
 const setAbout = open => {
+  if (!open) aboutPinned = false;
   aboutNav?.classList.toggle('is-open', open);
   aboutToggle?.setAttribute('aria-expanded', String(open));
 };
-aboutToggle?.addEventListener('click', () => setAbout(aboutToggle.getAttribute('aria-expanded') !== 'true'));
+aboutToggle?.addEventListener('click', () => { const open = !aboutPinned; setAbout(open); aboutPinned = open; });
 aboutNav?.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') setAbout(true); });
-aboutNav?.addEventListener('pointerleave', () => { if (!aboutNav.contains(document.activeElement)) setAbout(false); });
+aboutNav?.addEventListener('pointerleave', () => { if (!aboutPinned && !aboutNav.contains(document.activeElement)) setAbout(false); });
 aboutNav?.addEventListener('focusin', event => { if (event.target.matches('.about-nav-heading > a')) setAbout(true); });
 aboutNav?.addEventListener('focusout', event => { if (!aboutNav.contains(event.relatedTarget)) setAbout(false); });
 document.addEventListener('click', event => { if (!aboutNav?.contains(event.target)) setAbout(false); });

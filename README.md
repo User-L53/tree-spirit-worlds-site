@@ -50,3 +50,20 @@ Narrow embedded browsing-context checks are responsive rendering tests, not phys
 phone or touch-device certification. Physical Safari/Chrome, OS reduced motion and
 assistive technology review must be distinguished from source or desktop checks.
 Temporary responsive QA fixtures are removed before final owner handoff.
+
+
+## Verification in this pass
+
+- Full approved product description and original Buttondown form are byte-identical
+  to their prior versions. Routes, anchors, image alt text and unique IDs checked.
+- Real embedded viewport renders at 320/390/768px: Home has no horizontal overflow.
+- 390px flow exercised Home dialogue → About → Space text transformation → clock
+  → product, then Shop → Ebooks → product → Letters. Product and Letters rendering
+  inspected visually. This is not touch-device emulation or physical-phone testing.
+- All three unreleased category destinations display truthful empty states; direct
+  Current Work navigation also reaches the product. Price and Payhip href verified.
+- About hover/click interaction conflict caught during QA and corrected with pinned
+  disclosure state. Mobile navigation controls adjusted toward 44px target width.
+- Letters farewell reached its automatic final state without submitting the form.
+- Tree/root positions remain temporary; the final artwork is still a blocker to
+  completing the intended visual experience. No final tree/root visual QA claimed.
