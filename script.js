@@ -1,129 +1,66 @@
 document.documentElement.classList.add('js');
-const header = document.querySelector('[data-header]');
-const menuToggle = document.querySelector('[data-menu-toggle]');
-const navigation = document.querySelector('[data-nav]');
-
-document.querySelectorAll('[data-year]').forEach((year) => {
-  year.textContent = new Date().getFullYear();
-});
-
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
-
-menuToggle?.addEventListener('click', () => {
-  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-  menuToggle.setAttribute('aria-expanded', String(!isOpen));
-  navigation?.classList.toggle('is-open', !isOpen);
-});
-
-navigation?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menuToggle?.setAttribute('aria-expanded', 'false');
-    navigation.classList.remove('is-open');
-  });
-});
-
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealItems = document.querySelectorAll('.reveal');
-
-if (reducedMotion || !('IntersectionObserver' in window)) {
-  revealItems.forEach((item) => item.classList.add('is-visible'));
-} else {
-  const observer = new IntersectionObserver((entries, currentObserver) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      currentObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
-  revealItems.forEach((item) => observer.observe(item));
-}
-
-const rootyDialog = document.querySelector('[data-rooty-dialog]');
-const rootyOpen = document.querySelector('[data-rooty-open]');
-const rootyClose = document.querySelector('[data-rooty-close]');
-const rootyNext = document.querySelector('[data-rooty-next]');
+document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+// About is a disclosure beside a normal navigation link, not an application menu.
+const aboutNav = document.querySelector('[data-about-nav]');
+const aboutToggle = document.querySelector('[data-about-toggle]');
+const setAbout = open => {
+  aboutNav?.classList.toggle('is-open', open);
+  aboutToggle?.setAttribute('aria-expanded', String(open));
+};
+aboutToggle?.addEventListener('click', () => setAbout(aboutToggle.getAttribute('aria-expanded') !== 'true'));
+aboutNav?.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') setAbout(true); });
+aboutNav?.addEventListener('pointerleave', () => { if (!aboutNav.contains(document.activeElement)) setAbout(false); });
+aboutNav?.addEventListener('focusin', event => { if (event.target.matches('.about-nav-heading > a')) setAbout(true); });
+aboutNav?.addEventListener('focusout', event => { if (!aboutNav.contains(event.relatedTarget)) setAbout(false); });
+document.addEventListener('click', event => { if (!aboutNav?.contains(event.target)) setAbout(false); });
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && aboutNav?.classList.contains('is-open')) { setAbout(false); aboutToggle.focus(); } });
+// One encounter begins the dialogue. Further touches can advance it; nothing blocks scrolling.
+const rooty = document.querySelector('[data-rooty-touch]');
 const rootyLine = document.querySelector('[data-rooty-line]');
-const rootyWorld = document.querySelector('[data-rooty-world]');
-const rootyLines = [
-  'I am not exactly the owner of this place.',
-  'I am closer to its psyche.',
-  'When something changes here, I usually feel it first.',
-  'But you do not have to understand me yet.'
-];
-let rootyStep = 0;
-
-const resetRooty = () => {
-  rootyStep = 0;
-  if (rootyLine) rootyLine.textContent = rootyLines[0];
-  if (rootyNext) rootyNext.hidden = false;
-  if (rootyWorld) rootyWorld.hidden = false;
+const invitation = document.querySelector('[data-rooty-invitation]');
+const lines = ['Hello, I am Rooty.', 'Welcome to Tree Spirit Worlds.', 'I am the psyche of this place, and your guide while you are here.', 'Where would you like to go?'];
+let lineIndex = -1, dialogueTimer, responseTimer;
+const speak = () => {
+  clearTimeout(dialogueTimer); clearTimeout(responseTimer);
+  rooty.classList.add('is-aware');
+  responseTimer = setTimeout(() => rooty.classList.remove('is-aware'), 220);
+  rooty.setAttribute('aria-expanded', 'true');
+  if (reducedMotion.matches) { rootyLine.textContent = lines.join(' '); invitation.hidden = false; lineIndex = lines.length - 1; return; }
+  lineIndex = Math.min(lineIndex + 1, lines.length - 1);
+  rootyLine.textContent = lines[lineIndex];
+  invitation.hidden = lineIndex !== lines.length - 1;
+  rooty.setAttribute('aria-label', lineIndex === lines.length - 1 ? 'Rooty, your guide' : 'Continue listening to Rooty');
+  if (lineIndex < lines.length - 1) dialogueTimer = setTimeout(speak, lineIndex === 2 ? 4500 : 2500);
 };
-
-const closeRooty = () => {
-  if (!rootyDialog) return;
-  rootyDialog.hidden = true;
-  document.body.classList.remove('rooty-active');
-  document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = false);
-  rootyOpen?.setAttribute('aria-expanded', 'false');
-  rootyOpen?.focus();
-};
-
-rootyOpen?.addEventListener('click', () => {
-  resetRooty();
-  if (!rootyDialog) return;
-  rootyDialog.hidden = false;
-  rootyOpen?.setAttribute('aria-expanded', 'true');
-  document.body.classList.add('rooty-active');
-  document.querySelectorAll('body > header, body > main, body > footer').forEach(el => el.inert = true);
-  rootyClose?.focus();
-});
-
-rootyClose?.addEventListener('click', closeRooty);
-rootyDialog?.addEventListener('click', (event) => {
-  if (event.target === rootyDialog) closeRooty();
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && rootyDialog && !rootyDialog.hidden) closeRooty();
-});
-
-rootyNext?.addEventListener('click', () => {
-  if (rootyStep >= rootyLines.length - 1) return;
-  rootyStep += 1;
-  if (rootyLine) rootyLine.textContent = rootyLines[rootyStep];
-  if (rootyStep === rootyLines.length - 1) {
-    rootyNext.hidden = true;
-    rootyWorld.hidden = false;
-    rootyWorld.focus();
-  }
-});
-
-// Modal focus is contained; an exit path never depends on finishing the dialogue.
-rootyDialog?.addEventListener('keydown', event => {
-  if (event.key !== 'Tab') return;
-  const items = [...rootyDialog.querySelectorAll('button, a[href]')].filter(el => !el.hidden);
-  const first = items[0], last = items[items.length - 1];
-  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && navigation?.classList.contains('is-open')) {
-    navigation.classList.remove('is-open'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.focus();
-  }
-});
-// Notice → touch → immediate response → revealed identity → optional entry.
+rooty?.addEventListener('click', speak);
+// Progressive enhancement: all narrative text and work links remain available without JS.
+const reveals = document.querySelectorAll('.reveal');
+const farewell = document.querySelector('[data-farewell]');
+const show = element => element.classList.add(element.matches('[data-farewell]') ? 'is-present' : 'is-visible');
+if (reducedMotion.matches || !('IntersectionObserver' in window)) { reveals.forEach(show); if (farewell) show(farewell); }
+else {
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { show(entry.target); observer.unobserve(entry.target); } }), {threshold:.15});
+  reveals.forEach(el => observer.observe(el)); if (farewell) observer.observe(farewell);
+}
+reducedMotion.addEventListener?.('change', event => { if (event.matches) { reveals.forEach(show); if (farewell) show(farewell); if (rooty && lineIndex >= 0) speak(); } });
 document.querySelectorAll('[data-encounter]').forEach(encounter => {
-  const touch = encounter.querySelector('[data-object-touch]');
-  const work = encounter.querySelector('[data-object-work]');
-  const cue = encounter.querySelector('[data-object-cue]');
+  const touch = encounter.querySelector('[data-object-touch]'), work = encounter.querySelector('[data-object-work]'), cue = encounter.querySelector('[data-object-cue]');
   touch.hidden = false; work.hidden = true;
   touch.addEventListener('click', () => {
     const revealed = touch.getAttribute('aria-expanded') !== 'true';
-    touch.setAttribute('aria-expanded', String(revealed));
-    encounter.dataset.state = revealed ? 'revealed' : 'rest';
-    work.hidden = !revealed;
+    touch.setAttribute('aria-expanded', String(revealed)); encounter.dataset.state = revealed ? 'revealed' : 'rest'; work.hidden = !revealed;
     cue.textContent = revealed ? 'Time need not be a line.' : 'Touch the clock';
     touch.setAttribute('aria-label', revealed ? 'Hide the clock’s story' : 'Touch the clock to discover the work');
   });
 });
+const material = document.querySelector('[data-material]');
+const materialTouch = document.querySelector('[data-material-touch]');
+if (materialTouch) {
+  materialTouch.hidden = false;
+  materialTouch.addEventListener('click', () => {
+    const changed = material.classList.toggle('is-changed');
+    material.querySelector('[data-material-line]').textContent = changed ? 'A place to return to.' : 'An experience.';
+    materialTouch.textContent = changed ? 'Return to its first shape →' : 'Give it another shape →';
+  });
+}

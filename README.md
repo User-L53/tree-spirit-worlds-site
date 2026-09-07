@@ -1,79 +1,52 @@
-# Tree Spirit Worlds website
+# Tree Spirit Worlds — temporary website
 
-Public presentation source for Tree Spirit Worlds.
+Static GitHub Pages review site. No build dependencies, payment handling, subscriber
+storage, tracking or autoplay sound. Payhip owns checkout/payment/delivery; Buttondown
+owns the tested subscription flow. Do not add CNAME or migrate the production domain.
 
-## Security boundary
+## Current source of truth: refinement, 2026-09-07
 
-This repository is deliberately public. It may contain only public-facing website code and intentionally public assets.
+Navigation: Home / About / Space / Shop / Letters. The former World route redirects
+to Space. Full official logo is used in centered header and footer. The logo web
+asset is a faithful resize of the approved complete artwork, never a redraw.
+Approved Rooty remains unchanged and appears separately on Home and Letters.
 
-Do not commit:
+Serif carries literary voice; restrained system sans carries orientation and metadata.
+Shared tokens, responsive layouts, keyboard controls and reduced-motion rules live
+in styles.css. Interaction state lives in script.js; pages remain plain semantic HTML.
 
-- passwords, API keys, tokens, private keys, or credentials;
-- payment, subscriber, customer, or other personal data;
-- paid interactive source files or complete product masters;
-- unpublished manuscripts, editable production assets, or private business records;
-- environment files or service exports.
+- Home: centered Rooty; optional in-page progressive dialogue; no modal/Next controls.
+  About / Space / Shop directions always remain available. Existing final invitation
+  “Enter the World” is intentionally retained per the refinement brief.
+- About: identity, storytellers/world-builders, four media, why, quiet closing principle.
+- Space: tree/root architecture, space between, spatial time, text transformation,
+  distancing/storytelling principle, handless Roman-numeral clock → product.
+- Shop: four linked forms and one editorial Current Work. Full copy lives on product.
+- Categories: ebooks.html, interactive-experiences.html, audiobooks.html,
+  physical-objects.html. Only Ebooks has a released work; no invented inventory.
+- Product: the-internal-clock.html; approved eight-paragraph description, EPUB,
+  released, US$6.99, exact verified Payhip URL. Retailer names remain informational
+  because exact product URLs have not been supplied.
+- Letters: original form and two-column relationship retained; peripheral Rooty
+  automatically changes presence and reveals “Until next time.” independently of form.
 
-Payhip owns checkout, payment processing, and product delivery. Buttondown owns newsletter consent and subscriber storage. The website must never collect or store those records directly.
+## Artwork still required
 
-The public site uses no API keys, client-side payment form, analytics tracker, social-media embed, third-party JavaScript library, or web-font dependency. Its only public integrations are ordinary external links and Buttondown's native HTML POST form.
+Space's significant tree and root-system assets are not supplied as approved final
+production artwork. Clearly identified temporary positions reserve their composition;
+they are not final illustrations. Supply one major spirit tree and a coherent extended
+root system, without text labels, suitable for desktop and narrow vertical compositions.
+Do not replace them with the logo or generic fantasy imagery. No private master/reference
+sheet or paid narrative source belongs in this repository.
 
-The official Tree Spirit Worlds logo is the brand identifier; it is not Rooty. Rooty is a separate character and must never be derived from the logo. Only faithful web-optimized logo derivatives and an owner-approved standalone Rooty asset may be published here.
+## QA boundaries
 
-## Current publication state
+Test direct Shop → Current Work → product and Shop → Ebooks → product, all category
+empty states, Home dialogue, About disclosure, Space clock, and Letters farewell.
+Preserve the owner-confirmed Buttondown activation evidence; do not subscribe test users.
+Payhip stays the exact product-link fallback https://treesspirit.com/b/iElSr.
 
-This source is intended for temporary GitHub Pages review during Cycles 1–2. The live domain and DNS must not be changed until the controlled Cycle 3 migration.
-
-
-## Website system v1 — September 2026
-
-The site uses shared visual tokens in styles.css, semantic page sections, and
-optional stateful interactions in script.js. Keep the existing static architecture.
-
-| Page | Keep | Change | Remove | Add |
-| --- | --- | --- | --- | --- |
-| Home | Approved Rooty, logo, three paths, environmental principle | Rooty dialogue accessibility; shared type and touch targets | Dialogue prerequisite for World entry | Modal focus containment; always available World path |
-| World | Spatial principles, asymmetric articles, Roman I–XII handless clock | Quiet proposition; shared section spacing; click/tap encounter | Hover-only identity; public asset-review note | Respond → reveal identity → separate work link; no-JS work link |
-| About | World definition, mission, principles, four access modes | Who → what → why → mission → principles; plain language | IP-planning terminology; speculative object inventory | Shared section rhythm |
-| Shop | Released EPUB, US$6.99, exact final description, retailer names | Product and purchase first; four categories after product | Tall introductory pitch; internal retailer verification note; retailer badges | Plain category rows |
-| Letters | Exact working Buttondown POST form and consent; continuation | Shared type, touch targets and spacing | None | Shared keyboard/mobile refinements |
-
-Visual roles: Garamond-based local font stack (system serif fallback), forest/cream,
-76rem content container, 42rem reading measure, section spacing 4.5–9rem,
-World proposition 1.85–2.75rem, functional controls approximately 44px minimum.
-No font downloads or paid fonts. Actual face depends on fonts installed by visitor.
-
-Interaction primitives: reveal uses progressive enhancement; respond begins on click;
-transform changes the clock's resting state to a revealed story; enter is a separate
-normal link. Rooty presence is visible on Home, speaking only on request, and guiding
-through an immediately available World link. No navigation requires finishing dialogue.
-Reduced motion removes animated reveals and object movement. No sound or autoplay.
-
-Rooty: first standalone asset approved by owner for this pass; reuse unchanged.
-Logo is separate and unchanged. Clock retains existing structural geometry; no hands.
-No source material from the private narrative prototype belongs in this repository.
-
-Commerce: retain https://treesspirit.com/b/iElSr as the direct-purchase destination.
-Payhip official embed setup needs product-specific snippets from Share / Embed;
-none is supplied. The owner-authorized product-link fallback remains active.
-Reference: https://help.payhip.com/article/68-add-payhip-to-your-website
-Buttondown E2E activation was owner-confirmed previously; do not create subscriptions
-for QA. Retailer names are informational until exact product URLs are verified.
-
-Deploy only to the existing temporary GitHub Pages branch. Do not add CNAME,
-change DNS, migrate domains, or alter Payhip configuration. Stop for owner review.
-
-
-## Gap closure pass
-
-Preserve the system-v1 architecture. Final product copy keeps “Sophie does not.” as
-its own paragraph. The clock's revealed link reads “Discover The Internal Clock”.
-Focus/hover gives an immediate border response, activation changes state, and entry
-remains a separate link. Rooty exposes expanded state and bounded optional dialogue.
-Home pathways use unboxed directions; mobile pathways follow content in normal flow,
-preventing overlap with Rooty or enlarged text. All approved image assets unchanged.
-About and Letters content/form unchanged. Shared asset version: gap-1.
-
-Mobile viewport emulation is unavailable in the review browser; source inspection
-is not equivalent to a complete mobile journey test. Physical-phone review remains
-outstanding. Payhip stays the exact owner-verified product link fallback.
+Narrow embedded browsing-context checks are responsive rendering tests, not physical
+phone or touch-device certification. Physical Safari/Chrome, OS reduced motion and
+assistive technology review must be distinguished from source or desktop checks.
+Temporary responsive QA fixtures are removed before final owner handoff.
