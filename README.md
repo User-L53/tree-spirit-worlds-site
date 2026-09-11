@@ -21,6 +21,8 @@ The three supplied PNG Concept masters are retained outside the public repositor
 were not edited. Lossless 1254px WebP files and 800px delivery derivatives are stored in
 `assets/`. Full-size derivatives were checked at original dimensions for preserved
 composition, colour relationships and sharp detail without visible compression damage.
+View Work hero art is capped at 627 CSS pixels so the 1254px supplied masters retain
+2× density rather than being upscaled across a wide desktop canvas.
 
 The former Rooty, Sacred Tree/root system and handless-clock master presentation is no
 longer active. Its source assets remain in the repository until owner review is complete.
