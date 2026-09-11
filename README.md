@@ -17,6 +17,17 @@ repository:
 - responsive image delivery with intact square composition and high-DPI sources;
 - Works index and three initial View Work pages with reusable Possible Forms slots.
 
+The approved About mockup now governs the master interface across Home, About, Space,
+Works, Letters, and supporting pages: one green-black field (`#0d2315`), warm-ivory
+foreground text, a restrained book-like serif stack, finely tracked navigation, and a
+shared white editorial footer. Concept artwork may change by page; the shell must not.
+
+The About page uses the two supplied approved masters directly, without cropping,
+filters, recolouring, recompression, or upscaling:
+
+- `assets/masters/about-global-visual.png` (1672 × 941)
+- `assets/masters/about-one-world-many-forms.png` (1672 × 941)
+
 The three supplied PNG Concept masters are retained outside the public repository and
 were not edited. Lossless 1254px WebP files and 800px delivery derivatives are stored in
 `assets/`. Full-size derivatives were checked at original dimensions for preserved
